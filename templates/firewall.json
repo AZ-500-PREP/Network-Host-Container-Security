@@ -2,44 +2,44 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_Srv_Jump_name": {
-            "defaultValue": "Srv-Jump",
+        "virtualMachines_az500_VM1_name": {
+            "defaultValue": "az500-VM1",
             "type": "string"
         },
-        "virtualMachines_Srv_Work_name": {
-            "defaultValue": "Srv-Work",
+        "virtualMachines_az500_VM2_name": {
+            "defaultValue": "az500-VM2",
             "type": "string"
         },
         "virtualNetworks_az500V05vnet_name": {
             "defaultValue": "az500V05vnet",
             "type": "string"
         },
-        "networkInterfaces_srv_jump121_name": {
-            "defaultValue": "srv-jump121",
+        "networkInterfaces_az500_VM1121_name": {
+            "defaultValue": "az500-VM1121",
             "type": "string"
         },
-        "networkInterfaces_srv_work267_name": {
-            "defaultValue": "srv-work267",
+        "networkInterfaces_az500_VM2267_name": {
+            "defaultValue": "az500-VM2267",
             "type": "string"
         },
-        "publicIPAddresses_Srv_Jump_PIP_name": {
-            "defaultValue": "Srv-Jump-PIP",
+        "publicIPAddresses_az500_VM1_PIP_name": {
+            "defaultValue": "az500-VM1-PIP",
             "type": "string"
         },
-        "networkSecurityGroups_Srv_Jump_nsg_name": {
-            "defaultValue": "Srv-Jump-nsg",
+        "networkSecurityGroups_az500_VM1_nsg_name": {
+            "defaultValue": "az500-VM1-nsg",
             "type": "string"
         },
-        "networkSecurityGroups_Srv_Work_nsg_name": {
-            "defaultValue": "Srv-Work-nsg",
+        "networkSecurityGroups_az500_VM2_nsg_name": {
+            "defaultValue": "az500-VM2-nsg",
             "type": "string"
         },
-        "schedules_shutdown_computevm_srv_jump_name": {
-            "defaultValue": "shutdown-computevm-srv-jump",
+        "schedules_shutdown_computevm_az500_VM1_name": {
+            "defaultValue": "shutdown-computevm-az500-VM1",
             "type": "string"
         },
-        "schedules_shutdown_computevm_srv_work_name": {
-            "defaultValue": "shutdown-computevm-srv-work",
+        "schedules_shutdown_computevm_az500_VM2_name": {
+            "defaultValue": "shutdown-computevm-az500-VM2",
             "type": "string"
         }
     },
@@ -48,7 +48,7 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('networkSecurityGroups_Srv_Jump_nsg_name')]",
+            "name": "[parameters('networkSecurityGroups_az500_VM1_nsg_name')]",
             "location": "eastus",
             "properties": {
                 "provisioningState": "Succeeded",
@@ -201,7 +201,7 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('networkSecurityGroups_Srv_Work_nsg_name')]",
+            "name": "[parameters('networkSecurityGroups_az500_VM2_nsg_name')]",
             "location": "eastus",
             "properties": {
                 "provisioningState": "Succeeded",
@@ -334,7 +334,7 @@
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('publicIPAddresses_Srv_Jump_PIP_name')]",
+            "name": "[parameters('publicIPAddresses_az500_VM1_PIP_name')]",
             "location": "eastus",
             "sku": {
                 "name": "Basic",
@@ -402,10 +402,10 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-10-01",
-            "name": "[parameters('virtualMachines_Srv_Jump_name')]",
+            "name": "[parameters('virtualMachines_az500_VM1_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv_jump121_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_az500_VM1121_name'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -420,7 +420,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_Srv_Jump_name'), '_OsDisk_1_3d65499f1f76463ab31b970d6a05091f')]",
+                        "name": "[concat(parameters('virtualMachines_az500_VM1_name'), '_OsDisk_1_3d65499f1f76463ab31b970d6a05091f')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -432,7 +432,7 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_Srv_Jump_name')]",
+                    "computerName": "[parameters('virtualMachines_az500_VM1_name')]",
                     "adminUsername": "localadmin",
                     "adminPassword" : "Pa55w.rd1234",
                     "windowsConfiguration": {
@@ -445,7 +445,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv_jump121_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_az500_VM1121_name'))]"
                         }
                     ]
                 }
@@ -454,10 +454,10 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-10-01",
-            "name": "[parameters('virtualMachines_Srv_Work_name')]",
+            "name": "[parameters('virtualMachines_az500_VM2_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv_work267_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_az500_VM2267_name'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -472,7 +472,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_Srv_Work_name'), '_OsDisk_1_702785710c46462e82ccac7b5382f7c4')]",
+                        "name": "[concat(parameters('virtualMachines_az500_VM2_name'), '_OsDisk_1_702785710c46462e82ccac7b5382f7c4')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -484,7 +484,7 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_Srv_Work_name')]",
+                    "computerName": "[parameters('virtualMachines_az500_VM2_name')]",
                     "adminUsername": "localadmin",
                     "adminPassword": "Pa55w.rd1234",
                     "windowsConfiguration": {
@@ -497,7 +497,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv_work267_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_az500_VM2267_name'))]"
                         }
                     ]
                 }
@@ -506,10 +506,10 @@
         {
             "type": "microsoft.devtestlab/schedules",
             "apiVersion": "2016-05-15",
-            "name": "[parameters('schedules_shutdown_computevm_srv_jump_name')]",
+            "name": "[parameters('schedules_shutdown_computevm_az500_VM1_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_Srv_Jump_name'))]"
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_az500_VM1_name'))]"
             ],
             "properties": {
                 "status": "Enabled",
@@ -522,7 +522,7 @@
                     "status": "Disabled",
                     "timeInMinutes": 30
                 },
-                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_Srv_Jump_name'))]",
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_az500_VM1_name'))]",
                 "provisioningState": "Succeeded",
                 "uniqueIdentifier": "a58acdd9-a8c2-4e63-81f7-3892074dc1cf"
             }
@@ -530,10 +530,10 @@
         {
             "type": "microsoft.devtestlab/schedules",
             "apiVersion": "2016-05-15",
-            "name": "[parameters('schedules_shutdown_computevm_srv_work_name')]",
+            "name": "[parameters('schedules_shutdown_computevm_az500_VM2_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_Srv_Work_name'))]"
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_az500_VM2_name'))]"
             ],
             "properties": {
                 "status": "Enabled",
@@ -546,7 +546,7 @@
                     "status": "Disabled",
                     "timeInMinutes": 30
                 },
-                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_Srv_Work_name'))]",
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_az500_VM2_name'))]",
                 "provisioningState": "Succeeded",
                 "uniqueIdentifier": "d8697579-2f49-469a-b8a6-96e242be037d"
             }
@@ -554,9 +554,9 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2018-12-01",
-            "name": "[concat(parameters('networkSecurityGroups_Srv_Jump_nsg_name'), '/RDP')]",
+            "name": "[concat(parameters('networkSecurityGroups_az500_VM1_nsg_name'), '/RDP')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Jump_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_az500_VM1_nsg_name'))]"
             ],
             "properties": {
                 "provisioningState": "Succeeded",
@@ -618,11 +618,11 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('networkInterfaces_srv_work267_name')]",
+            "name": "[parameters('networkInterfaces_az500_VM2267_name')]",
             "location": "eastus",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'az500V05-SN')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Work_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_az500_VM2_nsg_name'))]"
             ],
             "properties": {
                 "provisioningState": "Succeeded",
@@ -652,7 +652,7 @@
                 "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Work_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_az500_VM2_nsg_name'))]"
                 },
                 "primary": true,
                 "tapConfigurations": []
@@ -661,12 +661,12 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('networkInterfaces_srv_jump121_name')]",
+            "name": "[parameters('networkInterfaces_az500_VM1121_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_Srv_Jump_PIP_name'))]",
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_az500_VM1_PIP_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'Jump-SN')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Jump_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_az500_VM1_nsg_name'))]"
             ],
             "properties": {
                 "provisioningState": "Succeeded",
@@ -680,7 +680,7 @@
                             "privateIPAddress": "10.0.3.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_Srv_Jump_PIP_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_az500_VM1_PIP_name'))]"
                             },
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'Jump-SN')]"
@@ -699,7 +699,7 @@
                 "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Jump_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_az500_VM1_nsg_name'))]"
                 },
                 "primary": true,
                 "tapConfigurations": []
