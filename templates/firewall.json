@@ -10,8 +10,8 @@
             "defaultValue": "Srv-Work",
             "type": "string"
         },
-        "virtualNetworks_Test_FW_VN_name": {
-            "defaultValue": "Test-FW-VN",
+        "virtualNetworks_az500V05vnet_name": {
+            "defaultValue": "az500V05vnet",
             "type": "string"
         },
         "networkInterfaces_srv_jump121_name": {
@@ -353,7 +353,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2018-12-01",
-            "name": "[parameters('virtualNetworks_Test_FW_VN_name')]",
+            "name": "[parameters('virtualNetworks_az500V05vnet_name')]",
             "location": "eastus",
             "properties": {
                 "provisioningState": "Succeeded",
@@ -577,9 +577,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2018-12-01",
-            "name": "[concat(parameters('virtualNetworks_Test_FW_VN_name'), '/AzureFirewallSubnet')]",
+            "name": "[concat(parameters('virtualNetworks_az500V05vnet_name'), '/AzureFirewallSubnet')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_Test_FW_VN_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_az500V05vnet_name'))]"
             ],
             "properties": {
                 "provisioningState": "Succeeded",
@@ -590,9 +590,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2018-12-01",
-            "name": "[concat(parameters('virtualNetworks_Test_FW_VN_name'), '/Jump-SN')]",
+            "name": "[concat(parameters('virtualNetworks_az500V05vnet_name'), '/Jump-SN')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_Test_FW_VN_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_az500V05vnet_name'))]"
             ],
             "properties": {
                 "provisioningState": "Succeeded",
@@ -604,9 +604,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2018-12-01",
-            "name": "[concat(parameters('virtualNetworks_Test_FW_VN_name'), '/Workload-SN')]",
+            "name": "[concat(parameters('virtualNetworks_az500V05vnet_name'), '/az500V05-SN')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_Test_FW_VN_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_az500V05vnet_name'))]"
             ],
             "properties": {
                 "provisioningState": "Succeeded",
@@ -621,7 +621,7 @@
             "name": "[parameters('networkInterfaces_srv_work267_name')]",
             "location": "eastus",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_Test_FW_VN_name'), 'Workload-SN')]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'az500V05-SN')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Work_nsg_name'))]"
             ],
             "properties": {
@@ -636,7 +636,7 @@
                             "privateIPAddress": "10.0.2.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_Test_FW_VN_name'), 'Workload-SN')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'az500V05-SN')]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
@@ -665,7 +665,7 @@
             "location": "eastus",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_Srv_Jump_PIP_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_Test_FW_VN_name'), 'Jump-SN')]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'Jump-SN')]",
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_Srv_Jump_nsg_name'))]"
             ],
             "properties": {
@@ -683,7 +683,7 @@
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_Srv_Jump_PIP_name'))]"
                             },
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_Test_FW_VN_name'), 'Jump-SN')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_az500V05vnet_name'), 'Jump-SN')]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
