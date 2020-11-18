@@ -1,0 +1,1 @@
+Get-AzureRmFirewall -ResourceGroupName $ResourceGroup
