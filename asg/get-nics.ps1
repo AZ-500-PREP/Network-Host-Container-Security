@@ -1,0 +1,2 @@
+Get-AzureRmNetworkInterface -Name NIC01 -ResourceGroupName az500rg1 | SELECT ‑ExpandProperty IPconfigurations | select -expandproperty applicationsecuritygroups | select id | fl
+Get-AzureRmNetworkInterface -Name NIC02 -ResourceGroupName az500rg1 | SELECT ‑ExpandProperty IPconfigurations | select -expandproperty applicationsecuritygroups | select id | fl
